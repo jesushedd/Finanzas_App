@@ -35,7 +35,9 @@ public class ApplicationFinanzas extends Application {
         FXMLLoader loaderGastos = new FXMLLoader(ApplicationFinanzas.class.getResource("formulario_gasto.fxml"));
         rootGastos = loaderGastos.load();
         gastosController  = loaderGastos.getController();
-        gastosController.setModelo(modelo);
+        gastosController.setViewModel(modelo);
+        gastosController.setChoiceBox();
+
         Scene gastosScene = new Scene(rootGastos);
 
         //configurar ventana secundaria
