@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.vjhe.finanzas.ApplicationFinanzas;
 
@@ -13,10 +12,6 @@ import java.io.IOException;
 public class PrincipalController {
     @FXML
     private Control lanzadorVentanaGastos;
-    @FXML
-    private Label welcomeText;
-
-
 
 
     private GastosController gastosController;
@@ -30,9 +25,11 @@ public class PrincipalController {
         FXMLLoader fxmlGasto =  new FXMLLoader(ApplicationFinanzas.class.getResource("formulario_gasto.fxml"));
         //checar si ya existe una ventana de gastos abierta
         if (gastosController != null){
+            //traer al frente la ventana ya existente
             return;
         }
         Stage secondaryStage = crearStageSecundario(fxmlGasto, lanzadorVentanaGastos);
+        secondaryStage.setResizable(false);
         secondaryStage.show();
     }
     /*
@@ -43,9 +40,15 @@ public class PrincipalController {
         Stage stage = new Stage();
         stage.setScene(new Scene(fxmlLoader.load()));
         gastosController = fxmlLoader.getController();
+
+
+        //stage.setScene(new Scene(new VentanaNuevoGasto().getRoot()));
+
         stage.initOwner(enStagePrimario.getScene().getWindow());
         //al cerrar la ventana
         stage.setOnCloseRequest(event -> {
+            System.out.println(stage.getHeight());
+            System.out.println(stage.getWidth());
             gastosController = null;
         });
         return stage;

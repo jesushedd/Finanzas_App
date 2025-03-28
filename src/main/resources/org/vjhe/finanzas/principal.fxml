@@ -103,7 +103,7 @@
                            </children>
                         </HBox>
                      </content></Tab>
-                <Tab text="Historico">
+                <Tab text="Histórico">
                      <content>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
