@@ -2,6 +2,7 @@ module org.vjhe.finanzas {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires java.sql;
 
 
     opens org.vjhe.finanzas to javafx.fxml;
