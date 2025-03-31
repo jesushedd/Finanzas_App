@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CategoriaDAO {
 
-    public void guardarCategoria(Categoria categoria){
+    public void guardar(Categoria categoria){
         String query = "INSERT INTO categorias(nombre) VALUES(?)";
         try (PreparedStatement statement =  ConexionDB.getConnection().prepareStatement(query)){
             statement.setString(1, categoria.toString());
@@ -21,7 +21,7 @@ public class CategoriaDAO {
         }
     }
 
-    public List<Categoria> obtenerCategorias(){
+    public List<Categoria> obtenerTodos(){
         String query = "SELECT * FROM categorias";
         List<Categoria> categoriaList = new ArrayList<>()   ;
         try (Statement statement = ConexionDB.getConnection().createStatement();
@@ -43,6 +43,6 @@ public class CategoriaDAO {
     }
 
     public static void main(String[] args) {
-        System.out.println(new CategoriaDAO().obtenerCategorias());
+        System.out.println(new CategoriaDAO().obtenerTodos());
     }
 }

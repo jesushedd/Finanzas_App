@@ -2,7 +2,6 @@ package org.vjhe.finanzas.modelo;
 
 import org.vjhe.finanzas.modelo.persistencia.CategoriaDAO;
 
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -15,8 +14,8 @@ public class BackModel {
         if (categorias.contains(categoriaACrear)){
             return;
         }
-        categorias.add(categoriaACrear);
-        categoriaDAO.guardarCategoria(categoriaACrear);
+        categoriaDAO.guardar(categoriaACrear);
+        sincronizarDB();
     }
 
     private void saveCategoria(Categoria categoria){
@@ -25,10 +24,12 @@ public class BackModel {
 
     public  BackModel(){
         sincronizarDB();
+
     }
 
     private void sincronizarDB(){
-        categorias.addAll(categoriaDAO.obtenerCategorias());
+
+        categorias.addAll(categoriaDAO.obtenerTodos());
     }
 
     public Set<Categoria> getCategorias(){

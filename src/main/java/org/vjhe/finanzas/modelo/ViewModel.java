@@ -22,8 +22,7 @@ public class ViewModel {
 
 
     public ViewModel(){
-        var categoriasSet  =  modeloReal.getCategorias();
-        categorias.addAll(categoriasSet);
+        categorias.setAll(modeloReal.getCategorias());
         addCategoriasBase();
 
     }

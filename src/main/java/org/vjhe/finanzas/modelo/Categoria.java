@@ -18,7 +18,7 @@ public class Categoria implements Comparable<Categoria>{
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(nombre);
+        return Objects.hash(id, nombre);
     }
 
     @Override
