@@ -1,15 +1,17 @@
 package org.vjhe.finanzas.controladores;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.vjhe.finanzas.modelo.Categoria;
 import org.vjhe.finanzas.modelo.ViewModel;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 
 public class GastosController {
@@ -18,6 +20,8 @@ public class GastosController {
     public ChoiceBox<Categoria> selectorCategorias;
     @FXML
     public TextField inputCategoria;
+    public Label fechaLabel;
+    public DatePicker fechaSelector;
     @FXML
     private Button botonCancelar;
     @FXML
@@ -26,6 +30,9 @@ public class GastosController {
     private TextField inputMonto;
 
     private ViewModel viewModel;
+
+    private ObjectProperty<LocalDate> fechaSeleccionada ;
+    private ObjectProperty<Categoria> categoriaSeleccionada;
 
     public void setViewModel(ViewModel viewModel){
         this.viewModel = viewModel;
@@ -36,6 +43,24 @@ public class GastosController {
 
     public void initialize(){
         restringirEntradaNumerica(inputMonto);
+        establecerSelecciones();
+
+
+        fechaSelector.setValue(LocalDate.now());
+        fechaSelector.setOnAction(this::cambiarFechaLabel);
+
+    }
+
+    private void cambiarFechaLabel(ActionEvent actionEvent){
+        if (actionEvent.getSource() != fechaSelector) return;
+        var fecha =    fechaSelector.getValue();
+        String prefijo = "";
+        var fechaS =fecha.format(DateTimeFormatter.ofPattern("d-M-y").localizedBy(Locale.of("ES")));
+        System.out.println(fechaS);
+    }
+    private void establecerSelecciones(){
+        fechaSeleccionada = fechaSelector.valueProperty();
+        categoriaSeleccionada = selectorCategorias.valueProperty();
     }
 
     public void setChoiceBox(){
